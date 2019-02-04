@@ -40,6 +40,7 @@ def upgrade():
     conn = op.get_bind()
     if conn.dialect.name == 'mysql':
         conn.execute("SET time_zone = '+00:00'")
+        conn.execute("SET explicit_defaults_for_timestamp=ON")
         cur = conn.execute("SELECT @@explicit_defaults_for_timestamp")
         res = cur.fetchall()
         if res[0][0] == 0:
